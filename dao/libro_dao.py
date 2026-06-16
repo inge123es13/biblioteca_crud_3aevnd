@@ -5,10 +5,10 @@ from models.libro import Libro
 
 class LibroDAO:
 #Corresponde a select*from libros
-    def obtener_librps(self):
+    def obtener_libros(self):
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
-        cursor.execute("Select * FROM libros")
+        cursor.execute("SELECT * FROM libro")
 
         registros = cursor.fetchall()
 
@@ -21,10 +21,11 @@ class LibroDAO:
                 isbn=registro[3],
                 disponible=registro[4]
             )
-            libro.append(libro)
-            cursor.close()
-            conexion.close()
-            return libros
+            libros.append(libro)
+
+        cursor.close()
+        conexion.close()
+        return libros
         
     #insert
     def insertar(self,libro):
