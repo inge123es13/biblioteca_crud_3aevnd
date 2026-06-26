@@ -33,14 +33,25 @@ def insertar_libro(libro_dao):
 
 def actualizar_libro(libro_dao):
     ver_todo(libro_dao)
+
     id = int(input("Escribe el id del libro a editar: "))
     print("Actualiza los datos de este libro")
+
     titulo = input("Escribe el nuevo titulo del libro: ")
     autor = int(input("Escribe el nuevo id del autor: "))
-    isbn = input("Escribe el nuevo isbn del libro: ")
-    disponible = bool(input("Escribe si el libro esta disponible o no: "))
+    isbn = input("Escribe el nuevo isdn del libro: ")
+
+    respuesta = input("Escribe si el libro esta disponible o no (si/no): ")
+
+    if respuesta.lower() == "si":
+        disponible = True
+    else:
+        disponible = False
+
     libro = Libro(id, titulo, autor, isbn, disponible)
     libro_dao.actualizar(libro)
+
+    print("Libro actualizado correctamente")
 
 def eliminar_libro(libro_dao):
     ver_todo(libro_dao)

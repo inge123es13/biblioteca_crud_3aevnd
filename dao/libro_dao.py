@@ -7,7 +7,7 @@ from models.libro import Libro
 
 class LibroDAO:
 
-    # SELECT * FROM libro
+    # SELECT
     def obtener_libros(self):
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
@@ -21,11 +21,10 @@ class LibroDAO:
             libro = Libro(
                 id=registro[0],
                 titulo=registro[1],
-                autor=registro[2],      # Corregido
+                autor=registro[2],
                 isbn=registro[3],
                 disponible=registro[4]
             )
-
             libros.append(libro)
 
         cursor.close()
@@ -39,7 +38,7 @@ class LibroDAO:
         cursor = conexion.cursor()
 
         sql = """
-        INSERT INTO libro(titulo, autor, isdn, disponible)
+        INSERT INTO libro (titulo, autor, isdn, disponible)
         VALUES (%s, %s, %s, %s)
         """
 
@@ -66,7 +65,7 @@ class LibroDAO:
         UPDATE libro
         SET titulo = %s,
             autor = %s,
-            isbn = %s,
+            isdn = %s,
             disponible = %s
         WHERE id_libro = %s
         """
@@ -100,3 +99,15 @@ class LibroDAO:
         cursor.close()
         conexion.close()
 
+    # OBTENER ÚLTIMO ID
+    def obtener_ultimo_id(self):
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
+
+        cursor.execute("SELECT id_libro FROM libro ORDER BY id_libro DESC")
+        resultado = cursor.fetchone()
+
+        cursor.close()
+        conexion.close()
+
+        return resultado
