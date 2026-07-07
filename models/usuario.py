@@ -1,14 +1,13 @@
-from models.libro import Libro
-
-# Clse usuario
+# Clase Usuario
 class Usuario:
 
-    def __init__(self,id , matricula, nombre, carrera):
+    def __init__(self, id, nombre, matricula, carrera, correo, activo=True):
         self.id = id
-        self.matricula = matricula
         self.nombre = nombre
+        self.matricula = matricula
         self.carrera = carrera
-        self.activo = True
+        self.correo = correo
+        self.activo = activo
 
     def activar(self):
         self.activo = True
@@ -20,4 +19,4 @@ class Usuario:
 
     def mostrar_info(self):
         estado = "Activo" if self.activo else "Inactivo"
-        return f"{self.nombre} - {self.carrera} : {estado}"
+        return f"{self.id} - {self.nombre} - {self.matricula} - Carrera: {self.carrera} - {self.correo} - {estado}"
