@@ -18,7 +18,7 @@ def main_window(page: ft.Page):
     subtitulo = ft.Text(
         "Seleccione una opción del menú",
         size=16,
-        color=ft.Colors.BLUE_GREY_500
+        color=ft.Colors.BLUE_GREY_600
     )
 
     contenido = ft.Container(
