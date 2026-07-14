@@ -19,6 +19,24 @@ def libro_form():
         "",
         color= ft.Colors.GREEN
     )
+#Recupera los valores de los Textfield
+    def guardar_libro(e):
+        titulo = titulo_input.value
+        autor = autor_input.value
+        isbn = isbn_input.value
+
+        #Validacion
+        if titulo == "" or autor == "" or isbn == "":
+            mensaje.value = "Todos los cambios son obligatorios"
+            mensaje.color = ft.Colors.RED
+        else:
+            mensaje.value = f"Libro '{titulo}' guardado correctamente"
+            mensaje.color= ft.Colors.GREEN
+            print(F"TITULO: {titulo}, AUTOR: {autor}, ISBN: {isbn}")
+            titulo_input.value = ""
+            autor_input.value= ""
+            isbn_input.value= ""
+        e.page.update()
 
     return ft.Container(
         padding=30,
@@ -41,7 +59,8 @@ def libro_form():
 
                 ft.ElevatedButton(
                     "Guardar",
-                    icon= ft.Icon.SAVE,
+                    icon= ft.Icons.SAVE,
+                    on_click= guardar_libro
                 ),
                 
                 mensaje
