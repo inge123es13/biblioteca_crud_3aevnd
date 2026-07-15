@@ -1,6 +1,6 @@
 import flet as ft
 
-def libro_form():
+def libro_form(regresar):
     titulo_input = ft.TextField(
         label= "Titulo del libro: ",
         width=400
@@ -62,6 +62,14 @@ def libro_form():
                     icon= ft.Icons.SAVE,
                     on_click= guardar_libro
                 ),
+
+                 ft.OutlinedButton(
+                    "Regresar",
+                    icon= ft.Icons.ARROW_BACK,
+                    on_click= lambda e: regresar()
+                ),
+
+                
                 
                 mensaje
             ],
