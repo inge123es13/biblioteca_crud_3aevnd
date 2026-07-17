@@ -1,4 +1,7 @@
 import flet as ft
+from models.libro import Libro
+from dao.libro_dao import LibroDAO
+
 
 def libro_form(regresar):
     titulo_input = ft.TextField(
@@ -29,13 +32,36 @@ def libro_form(regresar):
         if titulo == "" or autor == "" or isbn == "":
             mensaje.value = "Todos los cambios son obligatorios"
             mensaje.color = ft.Colors.RED
-        else:
+            e.page.update()
+            return
+        try:
+            libro_dao = LibroDAO()
+            id = libro_dao.obtener_ultimo_id() + 1
+
+            nuevo_libro = Libro(
+                id= id,
+                titulo= titulo,
+                autor= int(autor),
+                isbn= isbn,
+                disponible= True
+            )
+
+            libro_dao.insertar(nuevo_libro)
+
             mensaje.value = f"Libro '{titulo}' guardado correctamente"
             mensaje.color= ft.Colors.GREEN
-            print(F"TITULO: {titulo}, AUTOR: {autor}, ISBN: {isbn}")
+           
             titulo_input.value = ""
             autor_input.value= ""
             isbn_input.value= ""
+
+        except ValueError:
+            mensaje.value = "El campo 'Autor' debe ser un numero entero"
+            mensaje.color= ft.Colors.RED
+           
+        except Exception as ex:
+            mensaje.value = f"Error al guardar el libro: {ex}"
+            mensaje.color= ft.Colors.RED
         e.page.update()
 
     return ft.Container(

@@ -106,6 +106,7 @@ class LibroDAO:
 
         cursor.execute("SELECT id_libro FROM libro ORDER BY id_libro DESC")
         resultado = cursor.fetchone()
+        return resultado [0] if resultado and resultado[0] is None else 0
 
         cursor.close()
         conexion.close()
